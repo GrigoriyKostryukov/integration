@@ -1,0 +1,111 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+{{super()}}
+<link href="/static/css/main.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="box center">
+        <div class="form-header">
+            <h2>Интерполирование функции методом Гаусса</h2>
+            <h3>Григорий Кострюков, ИВТ-31</h3>
+            <h3><i>y = α*sin(tg(βx))*sin(γx)</i></h3>
+        </div>
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <h3>Коэффициенты</h3>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="block">
+                        <label>α = </label>
+                        {{ form.alpha(class="input coeff")}}
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="block">
+                        <label>β = </label>
+                        {{ form.beta(class="input coeff")}}
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="block">
+                        <label> γ = </label>
+                        {{ form.gamma(class="input coeff")}}
+                    </div>
+                </div>
+            </div>
+            <h3>Количество узлов</h3>
+
+            <div class="block">
+                <label class="big-label"> 2n + 2, где n = </label>
+                {{ form.nodes_number(class="input coeff")}}
+            </div>
+
+
+            <div>
+                <h3>Размеры окна</h3>
+                <h4>X:</h4>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="block">
+                            <label>От</label>
+                            {{ form.A(class="input coeff")}}
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="block">
+                            <label>до</label>
+                            {{ form.B(class="input coeff")}}
+                        </div>
+                    </div>
+                </div>
+                <h4>Y:</h4>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="block">
+                            <label>От</label>
+                            {{ form.C(class="input coeff")}}
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="block">
+                            <label>до</label>
+                            {{ form.D(class="input coeff")}}
+                        </div>
+                    </div>
+                </div>
+
+
+                <h3>Отображаемые графики функций</h3>
+                <div class="block">
+                    {{ form.f(class="checkbox func-checkbox")}}
+                    <label>f(x)</label>
+                </div>
+                <div class="block">
+                    {{ form.Pn(class="checkbox func-checkbox")}}
+                    <label>P(x)</label>
+                </div>
+                <div class="block">
+                    {{ form.df(class="checkbox func-checkbox")}}
+                    <label>df(x)</label>
+                </div>
+                <div class="block">
+                    {{ form.dPn(class="checkbox func-checkbox")}}
+                    <label>dP(x)</label>
+                </div>
+                <div class="block">
+                    {{ form.rn(class="checkbox func-checkbox")}}
+                    <label>r(x)</label>
+                </div>
+                {{ form.submit(class="btn btn-primary plot-button") }}
+            </div>
+        </form>
+        {% if graph %}
+        <img src="data:image/png;base64, {{ graph }}" width="1100" height="700">
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}
