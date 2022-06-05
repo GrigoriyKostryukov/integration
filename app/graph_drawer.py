@@ -4,20 +4,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def plot_graph(start, end, bottom, top, functions):
+def plot_graph(start, end, bottom, top, points, integral_values):
 
     x = np.linspace(start - 0.1, end + 0.1, 5000)
 
     fig, ax = plt.subplots()
     ax = plt.gca()
     ax.set_ylim([bottom, top])
-    colors = ['r', 'g', 'b', 'm', 'k']
-    color = 0
-    for label, function in functions.items():
-        plt.plot(x, function(x), colors[color], label=label)
-        color +=1
-    ax.grid(True)
-    ax.legend()
+    plt.plot(points, integral_values, 'r')
+
     plt.rcParams['figure.figsize'] = [15, 8]
     image = create_image()
     return image

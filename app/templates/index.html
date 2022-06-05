@@ -9,7 +9,7 @@
 <div class="container">
     <div class="box center">
         <div class="form-header">
-            <h2>Интерполирование функции методом Гаусса</h2>
+            <h2>Численное интегрирование методом прямоугольников</h2>
             <h3>Григорий Кострюков, ИВТ-31</h3>
             <h3><i>y = α*sin(tg(βx))*sin(γx)</i></h3>
         </div>
@@ -35,12 +35,24 @@
                         {{ form.gamma(class="input coeff")}}
                     </div>
                 </div>
+                <div class="col-sm-3">
+                    <div class="block">
+                        <label> a = </label>
+                        {{ form.lower_limit(class="input coeff")}}
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="block">
+                        <label> a = </label>
+                        {{ form.upper_limit(class="input coeff")}}
+                    </div>
+                </div>
             </div>
-            <h3>Количество узлов</h3>
+            <h3>Начальное количество узлов</h3>
 
             <div class="block">
-                <label class="big-label"> 2n + 2, где n = </label>
-                {{ form.nodes_number(class="input coeff")}}
+                <label class="big-label"> n = </label>
+                {{ form.n(class="input coeff")}}
             </div>
 
 
@@ -77,33 +89,24 @@
                     </div>
                 </div>
 
-
-                <h3>Отображаемые графики функций</h3>
-                <div class="block">
-                    {{ form.f(class="checkbox func-checkbox")}}
-                    <label>f(x)</label>
-                </div>
-                <div class="block">
-                    {{ form.Pn(class="checkbox func-checkbox")}}
-                    <label>P(x)</label>
-                </div>
-                <div class="block">
-                    {{ form.df(class="checkbox func-checkbox")}}
-                    <label>df(x)</label>
-                </div>
-                <div class="block">
-                    {{ form.dPn(class="checkbox func-checkbox")}}
-                    <label>dP(x)</label>
-                </div>
-                <div class="block">
-                    {{ form.rn(class="checkbox func-checkbox")}}
-                    <label>r(x)</label>
-                </div>
-                {{ form.submit(class="btn btn-primary plot-button") }}
             </div>
+
+            <div>
+                <h3>Выбранный параметр</h3>
+                {{form.selected_parameter}}
+            </div>
+            <div>
+                <h3>Точность</h3>
+                {{form.precision}}
+            </div>
+            {{ form.submit(class="btn btn-primary plot-button") }}
         </form>
         {% if graph %}
+        <h2>График функции F(x)</h2>
         <img src="data:image/png;base64, {{ graph }}" width="1100" height="700">
+        {% endif %}
+        {% if n_max %}
+        <h2>Максимальное число отрезков разбиения Nmax = {{n_max}}</h2>
         {% endif %}
     </div>
 
