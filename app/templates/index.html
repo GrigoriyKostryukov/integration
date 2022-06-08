@@ -9,9 +9,9 @@
 <div class="container">
     <div class="box center">
         <div class="form-header">
-            <h2>Численное интегрирование методом прямоугольников</h2>
-            <h3>Григорий Кострюков, ИВТ-31</h3>
-            <h3><i>y = α*sin(tg(βx))*sin(γx)</i></h3>
+            <h1>Численное интегрирование методом прямоугольников</h1>
+            <h2>Григорий Кострюков, ИВТ-31</h2>
+            <h2><i>f(x) = α*sin(tg(βx))*sin(γx)</i></h2>
         </div>
         <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
@@ -35,6 +35,10 @@
                         {{ form.gamma(class="input coeff")}}
                     </div>
                 </div>
+
+            </div>
+            <h3>Пределы интегрирования</h3>
+            <div class="row">
                 <div class="col-sm-3">
                     <div class="block">
                         <label> a = </label>
@@ -43,13 +47,12 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="block">
-                        <label> a = </label>
+                        <label> b = </label>
                         {{ form.upper_limit(class="input coeff")}}
                     </div>
                 </div>
             </div>
-            <h3>Начальное количество узлов</h3>
-
+            <h3>Начальное число отрезков разбиения</h3>
             <div class="block">
                 <label class="big-label"> n = </label>
                 {{ form.n(class="input coeff")}}
@@ -101,13 +104,14 @@
             </div>
             {{ form.submit(class="btn btn-primary plot-button") }}
         </form>
+        {% if n_max %}
+        <h2>Максимальное число отрезков разбиения Nmax = {{n_max}}</h2>
+        {% endif %}
         {% if graph %}
         <h2>График функции F(x)</h2>
         <img src="data:image/png;base64, {{ graph }}" width="1100" height="700">
         {% endif %}
-        {% if n_max %}
-        <h2>Максимальное число отрезков разбиения Nmax = {{n_max}}</h2>
-        {% endif %}
+        
     </div>
 
 </div>

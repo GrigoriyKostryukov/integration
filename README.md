@@ -24,7 +24,7 @@ $ python3 -m venv venv
 ```
 $ source venv/bin/activate
 ```
-(Linux)
+(GNU/Linux)
 
 3. Установка зависимостей
 ```

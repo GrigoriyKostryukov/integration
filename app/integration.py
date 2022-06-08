@@ -15,23 +15,24 @@ def In(f, n, lower, upper):
     """Приближёное вычисление интеграла с разбиением на n отрезков"""
     
     step = (upper - lower)/n
-    points = [lower + i*step for i in range(n+1)]
     integral_value = 0
     for i in range(1, n+1):
-        integral_value += f((points[i] + points[i-1])/2)*step
+        integral_value += f((lower + i*step) - (step/2))*step
     return integral_value
 
 
 def integral(f, lower, upper, n, precision):
+    """Приближёное вычисление интеграла с указанной точностью"""
     # Приближённое значение интеграла для разбиения на n отрезков
-    current_splitting = In(f, n, lower, upper)
+    current_partition = In(f, n, lower, upper)
     # Приближённое значение интеграла для разбиения на 2n отрезков
-    double_splitting = In(f, 2*n, lower, upper)
-    current_precision = (1/3)*abs(current_splitting - double_splitting)
-    if current_precision <= precision:
-        return (current_splitting, 2*n)
-    else:
-        return integral(f, lower, upper, 2*n, precision)
+    double_partition = In(f, 2*n, lower, upper)
+    while (1/3)*abs(current_partition - double_partition) > precision:
+        n*=2
+        current_partition = double_partition
+        double_partition = In(f, 2*n, lower, upper)
+    return (double_partition, 2*n)
+
 
 
 def integrate(form):
